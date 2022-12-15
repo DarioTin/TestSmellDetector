@@ -71,8 +71,10 @@ public class UnknownTest extends AbstractSmell {
                 super.visit(n, arg);
 
                 // no assertions and no annotation
-                if (!hasAssert && !hasExceptionAnnotation)
+                if (!hasAssert && !hasExceptionAnnotation){
                     testMethod.setSmell(true);
+                    putSmellyElement(n.getName().toString());
+                }
 
                 smellyElementsSet.add(testMethod);
 

@@ -1,9 +1,5 @@
-import testsmell.AbstractSmell;
-import testsmell.ResultsWriter;
-import testsmell.TestFile;
-import testsmell.TestSmellDetector;
+import testsmell.*;
 import thresholds.DefaultThresholds;
-import thresholds.Thresholds;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,9 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -61,16 +55,6 @@ public class Main {
         List<String> columnNames;
         List<String> columnValues;
 
-        columnNames = testSmellDetector.getTestSmellNames();
-        columnNames.add(0, "App");
-        columnNames.add(1, "TestClass");
-        columnNames.add(2, "TestFilePath");
-        columnNames.add(3, "ProductionFilePath");
-        columnNames.add(4, "RelativeTestFilePath");
-        columnNames.add(5, "RelativeProductionFilePath");
-        columnNames.add(6, "NumberOfMethods");
-
-        resultsWriter.writeColumnName(columnNames);
 
         /*
           Iterate through all test files to detect smells and then write the output
@@ -87,22 +71,17 @@ public class Main {
             tempFile = testSmellDetector.detectSmells(file);
 
             //write output
-            columnValues = new ArrayList<>();
-            columnValues.add(file.getApp());
-            columnValues.add(file.getTestFileName());
-            columnValues.add(file.getTestFilePath());
-            columnValues.add(file.getProductionFilePath());
-            columnValues.add(file.getRelativeTestFilePath());
-            columnValues.add(file.getRelativeProductionFilePath());
-            columnValues.add(String.valueOf(file.getNumberOfTestMethods()));
             for (AbstractSmell smell : tempFile.getTestSmells()) {
-                try {
-                    columnValues.add(String.valueOf(smell.getNumberOfSmellyTests()));
-                } catch (NullPointerException e) {
-                    columnValues.add("");
+                // TODO: etrapolare il nome dello smell, il metodo dello smell ed inserirlo nel csv
+
+                if(smell.hasSmell()){
+                    System.out.println(smell.getSmellName());
+                    System.out.println(smell.getNumberOfSmellyTests());
+                    Map<String, Set<String>> result = smell.getResult();
+                    System.out.println(" \t " + result.values());
+                    resultsWriter.writeResultOutput(smell.getResult());
                 }
             }
-            resultsWriter.writeLine(columnValues);
         }
 
         System.out.println("end");

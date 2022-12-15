@@ -58,6 +58,7 @@ public class SleepyTest extends AbstractSmell {
 
                 boolean isSmelly = sleepCount > thresholds.getSleepyTest();
                 testMethod.setSmell(isSmelly);
+                if(isSmelly) putSmellyElement(n.getName().toString());
                 testMethod.addDataItem("ThreadSleepCount", String.valueOf(sleepCount));
 
                 smellyElementsSet.add(testMethod);

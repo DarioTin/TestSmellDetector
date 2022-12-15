@@ -70,6 +70,7 @@ public class IgnoredTest extends AbstractSmell {
                 if (n.getAnnotationByName("Ignore").isPresent()) {
                     testMethod = new TestMethod(n.getNameAsString());
                     testMethod.setSmell(true);
+                    putSmellyElement(n.getName().toString());
                     smellyElementsSet.add(testMethod);
                     return;
                 }
@@ -81,6 +82,7 @@ public class IgnoredTest extends AbstractSmell {
                 if (!n.getModifiers().contains(Modifier.PUBLIC)) {
                     testMethod = new TestMethod(n.getNameAsString());
                     testMethod.setSmell(true);
+                    putSmellyElement(n.getName().toString());
                     smellyElementsSet.add(testMethod);
                     return;
                 }

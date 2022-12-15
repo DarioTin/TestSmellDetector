@@ -57,6 +57,7 @@ public class EmptyTest extends AbstractSmell {
                     if (n.getBody().isPresent()) {
                         //get the total number of statements contained in the method
                         boolean isSmelly = n.getBody().get().getStatements().size() == thresholds.getEmptyTest();
+                        if(isSmelly) putSmellyElement(n.getName().toString());
                         testMethod.setSmell(isSmelly); //the method has no statements (i.e no body)
                     }
                 }

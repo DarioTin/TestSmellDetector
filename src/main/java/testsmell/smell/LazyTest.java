@@ -67,6 +67,7 @@ public class LazyTest extends AbstractSmell {
                     // If the counts were equal it means that the production method is only used (called from) inside one test method
                     TestMethod testClass = new TestMethod(method.getTestMethod());
                     testClass.setSmell(true);
+                    putSmellyElement(method.productionMethod);
                     smellyElementsSet.add(testClass);
                 }
             }

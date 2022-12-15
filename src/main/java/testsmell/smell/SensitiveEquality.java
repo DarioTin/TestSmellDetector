@@ -52,6 +52,7 @@ public class SensitiveEquality extends AbstractSmell {
 
                 boolean isSmelly = sensitiveCount > thresholds.getSensitiveEquality();
                 testMethod.setSmell(isSmelly);
+                if(isSmelly) putSmellyElement(n.getName().toString());
                 testMethod.addDataItem("SensitiveCount", String.valueOf(sensitiveCount));
 
                 smellyElementsSet.add(testMethod);

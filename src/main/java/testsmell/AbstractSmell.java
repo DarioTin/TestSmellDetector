@@ -4,16 +4,33 @@ import com.github.javaparser.ast.CompilationUnit;
 import thresholds.Thresholds;
 
 import java.io.FileNotFoundException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public abstract class AbstractSmell {
     protected Thresholds thresholds;
     protected Set<SmellyElement> smellyElementsSet;
+    protected Map<String, Set<String>> result;
 
     public AbstractSmell(Thresholds thresholds) {
         this.thresholds = thresholds;
         this.smellyElementsSet = new HashSet<>();
+        this.result = new HashMap<>();
+    }
+
+    public Map<String,Set<String>> getResult(){
+        return this.result;
+    }
+
+    public void putSmellyElement(String element) {
+        if(result.containsKey(this.getSmellName())){
+            Set<String> list = result.get(this.getSmellName());
+            list.add(element);
+            this.result.put(this.getSmellName(),list);
+        } else {
+            Set<String> list = new HashSet<>();
+            list.add(element);
+            this.result.put(this.getSmellName(),list);
+        }
     }
 
     public abstract String getSmellName();

@@ -12,6 +12,8 @@ import testsmell.Util;
 import thresholds.Thresholds;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
 If a test method contains an assert statement that explicitly returns a true or false, the method is marked as smelly
@@ -35,6 +37,7 @@ public class RedundantAssertion extends AbstractSmell {
      */
     @Override
     public void runAnalysis(CompilationUnit testFileCompilationUnit, CompilationUnit productionFileCompilationUnit, String testFileName, String productionFileName) throws FileNotFoundException {
+        System.out.println("1");
         RedundantAssertion.ClassVisitor classVisitor;
         classVisitor = new RedundantAssertion.ClassVisitor();
         classVisitor.visit(testFileCompilationUnit, null);
@@ -44,6 +47,7 @@ public class RedundantAssertion extends AbstractSmell {
         private MethodDeclaration currentMethod = null;
         private int redundantCount = 0;
         TestMethod testMethod;
+        List<TestMethod> smellyMethods = new ArrayList<>();
 
         // examine all methods in the test class
         @Override
@@ -53,9 +57,12 @@ public class RedundantAssertion extends AbstractSmell {
                 testMethod = new TestMethod(n.getNameAsString());
                 testMethod.setSmell(false); //default value is false (i.e. no smell)
                 super.visit(n, arg);
-
                 boolean isSmelly = redundantCount > thresholds.getRedundantAssertion();
                 testMethod.setSmell(isSmelly);
+                if(testMethod.isSmelly()){
+                    smellyMethods.add(testMethod);
+                    putSmellyElement(n.getName().toString());
+                }
                 testMethod.addDataItem("RedundantCount", String.valueOf(redundantCount));
 
                 smellyElementsSet.add(testMethod);

@@ -64,6 +64,7 @@ public class VerboseTest extends AbstractSmell {
                 }
                 boolean isSmelly = verboseCount > thresholds.getVerboseTest();
                 testMethod.setSmell(isSmelly);
+                if(isSmelly) putSmellyElement(n.getName().toString());
                 testMethod.addDataItem("VerboseCount", String.valueOf(verboseCount));
 
                 smellyElementsSet.add(testMethod);

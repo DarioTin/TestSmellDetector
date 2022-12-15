@@ -59,7 +59,7 @@ public class ExceptionCatchingThrowing extends AbstractSmell {
                     exceptionCount++;
 
                 boolean isSmelly = exceptionCount > thresholds.getExceptionCatchingThrowing();
-
+                if(isSmelly) putSmellyElement(n.getName().toString());
                 testMethod.setSmell(isSmelly);
                 testMethod.addDataItem("ExceptionCount", String.valueOf(exceptionCount));
 

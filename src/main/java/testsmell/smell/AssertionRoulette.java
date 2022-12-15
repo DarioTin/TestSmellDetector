@@ -11,6 +11,7 @@ import testsmell.Util;
 import thresholds.Thresholds;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,6 +26,7 @@ public class AssertionRoulette extends AbstractSmell {
     public AssertionRoulette(Thresholds thresholds) {
         super(thresholds);
     }
+
 
     /**
      * Checks of 'Assertion Roulette' smell
@@ -75,6 +77,7 @@ public class AssertionRoulette extends AbstractSmell {
                 //if there is more than one assert statement, then all the asserts need to have an explanation message
                 else if (isSmelly) {
                     testMethod.setSmell(true);
+                    putSmellyElement(n.getName().toString());
                 }
 
                 testMethod.addDataItem("AssertCount", String.valueOf(assertNoMessageCount));

@@ -61,7 +61,7 @@ public class ConditionalTestLogic extends AbstractSmell {
                         foreachCount > thresholds.getConditionalTestLogic() |
                         forCount > thresholds.getConditionalTestLogic() |
                         whileCount > thresholds.getConditionalTestLogic();
-
+                if(isSmelly) putSmellyElement(n.getName().toString());
                 testMethod.setSmell(isSmelly);
 
                 testMethod.addDataItem("ConditionCount", String.valueOf(conditionCount));
