@@ -64,8 +64,6 @@ public class Main {
         Date date;
         for (TestFile file : testFiles) {
             date = new Date();
-            System.out.println(dateFormat.format(date) + " Processing: " + file.getTestFilePath());
-            System.out.println("Processing: " + file.getTestFilePath());
 
             //detect smells
             tempFile = testSmellDetector.detectSmells(file);
@@ -76,7 +74,6 @@ public class Main {
 
                 if(smell.hasSmell()){
                     System.out.println(smell.getSmellName());
-                    System.out.println(smell.getNumberOfSmellyTests());
                     Map<String, Set<String>> result = smell.getResult();
                     System.out.println(" \t " + result.values());
                     resultsWriter.writeResultOutput(smell.getResult());
@@ -84,7 +81,6 @@ public class Main {
             }
         }
 
-        System.out.println("end");
     }
 
 

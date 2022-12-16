@@ -37,7 +37,6 @@ public class RedundantAssertion extends AbstractSmell {
      */
     @Override
     public void runAnalysis(CompilationUnit testFileCompilationUnit, CompilationUnit productionFileCompilationUnit, String testFileName, String productionFileName) throws FileNotFoundException {
-        System.out.println("1");
         RedundantAssertion.ClassVisitor classVisitor;
         classVisitor = new RedundantAssertion.ClassVisitor();
         classVisitor.visit(testFileCompilationUnit, null);
