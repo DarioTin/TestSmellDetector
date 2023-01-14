@@ -69,7 +69,10 @@ public class ConstructorInitialization extends AbstractSmell {
                 if (!constructorAllowed) {
                     testClass = new TestClass(n.getNameAsString());
                     testClass.setHasSmell(true);
-                    if(testClass.isSmelly()) putSmellyElement(n.getName().toString());
+                    if(testClass.isSmelly()){
+                        putSmellyElement(n.getName().toString());
+                        addScore(1);
+                    }
                     smellyElementsSet.add(testClass);
                 }
             }

@@ -71,6 +71,7 @@ public class IgnoredTest extends AbstractSmell {
                     testMethod = new TestMethod(n.getNameAsString());
                     testMethod.setSmell(true);
                     putSmellyElement(n.getName().toString());
+                    addScore(1);
                     smellyElementsSet.add(testMethod);
                     return;
                 }

@@ -78,6 +78,7 @@ public class AssertionRoulette extends AbstractSmell {
                 else if (isSmelly) {
                     testMethod.setSmell(true);
                     putSmellyElement(n.getName().toString());
+                    addScore(assertNoMessageCount);
                 }
 
                 testMethod.addDataItem("AssertCount", String.valueOf(assertNoMessageCount));

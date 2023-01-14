@@ -60,6 +60,7 @@ public class DuplicateAssert extends AbstractSmell {
                 if (set1.size() < assertMessage.size()) {
                     testMethod.setSmell(true);
                     putSmellyElement(n.getName().toString());
+                    addScore(set1.size());
                 }
 
                 // if there are duplicate assert methods, then the smell exists

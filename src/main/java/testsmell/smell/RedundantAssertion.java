@@ -61,6 +61,7 @@ public class RedundantAssertion extends AbstractSmell {
                 if(testMethod.isSmelly()){
                     smellyMethods.add(testMethod);
                     putSmellyElement(n.getName().toString());
+                    addScore(redundantCount);
                 }
                 testMethod.addDataItem("RedundantCount", String.valueOf(redundantCount));
 

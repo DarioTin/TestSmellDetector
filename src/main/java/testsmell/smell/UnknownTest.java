@@ -74,6 +74,7 @@ public class UnknownTest extends AbstractSmell {
                 if (!hasAssert && !hasExceptionAnnotation){
                     testMethod.setSmell(true);
                     putSmellyElement(n.getName().toString());
+                    addScore(1);
                 }
 
                 smellyElementsSet.add(testMethod);

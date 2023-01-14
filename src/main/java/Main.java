@@ -75,7 +75,10 @@ public class Main {
                 if(smell.hasSmell()){
                     System.out.println(smell.getSmellName());
                     Map<String, Set<String>> result = smell.getResult();
-                    System.out.println(" \t " + result.values());
+                    Map<String, Integer> score = smell.getScore();
+                    System.out.print(" \t " + result.values());
+                    System.out.print(" \t " + score.values());
+                    System.out.print("\n");
                     resultsWriter.writeResultOutput(smell.getResult());
                 }
             }

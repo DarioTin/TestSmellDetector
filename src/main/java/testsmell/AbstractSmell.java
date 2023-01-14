@@ -10,15 +10,21 @@ public abstract class AbstractSmell {
     protected Thresholds thresholds;
     protected Set<SmellyElement> smellyElementsSet;
     protected Map<String, Set<String>> result;
+    protected Map<String, Integer> score;
 
     public AbstractSmell(Thresholds thresholds) {
         this.thresholds = thresholds;
         this.smellyElementsSet = new HashSet<>();
         this.result = new HashMap<>();
+        this.score = new HashMap<>();
     }
 
     public Map<String,Set<String>> getResult(){
         return this.result;
+    }
+
+    public Map<String, Integer> getScore() {
+        return score;
     }
 
     public void putSmellyElement(String element) {
@@ -32,6 +38,17 @@ public abstract class AbstractSmell {
             this.result.put(this.getSmellName(),list);
         }
     }
+
+    public void addScore(Integer point){
+        if(score.containsKey(this.getSmellName())){
+            Integer points = score.get(this.getSmellName());
+            points+= point;
+            this.score.put(this.getSmellName(),points);
+        } else{
+            this.score.put(this.getSmellName(),point);
+        }
+    }
+
 
     public abstract String getSmellName();
 
