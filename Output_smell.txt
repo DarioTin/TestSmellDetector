@@ -1,6 +1,0 @@
-Assertion Roulette
-	main 
-Redundant Assertion
-	main 
-Magic Number Test
-	mgk 	mgk3 	main 

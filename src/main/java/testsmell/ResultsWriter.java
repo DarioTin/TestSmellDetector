@@ -21,7 +21,6 @@ public class ResultsWriter {
      * @throws IOException
      */
     private ResultsWriter() throws IOException {
-        String time =  String.valueOf(Calendar.getInstance().getTimeInMillis());
         outputFile = MessageFormat.format("{0}_{1}.{2}", "Output","smell", "txt");
         writer = new FileWriter(outputFile,false);
     }

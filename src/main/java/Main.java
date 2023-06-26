@@ -1,3 +1,8 @@
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.stream.JsonWriter;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import testsmell.*;
 import thresholds.DefaultThresholds;
 
@@ -48,40 +53,30 @@ public class Main {
             testFiles.add(testFile);
         }
 
-        /*
-          Initialize the output file - Create the output file and add the column names
-         */
-        ResultsWriter resultsWriter = ResultsWriter.createResultsWriter();
-        List<String> columnNames;
-        List<String> columnValues;
-
-
-        /*
-          Iterate through all test files to detect smells and then write the output
-        */
         TestFile tempFile;
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Date date;
-        for (TestFile file : testFiles) {
-            date = new Date();
 
+        JSONObject jsonResult = new JSONObject();
+        for (TestFile file : testFiles) {
             //detect smells
             tempFile = testSmellDetector.detectSmells(file);
-
             //write output
             for (AbstractSmell smell : tempFile.getTestSmells()) {
-                // TODO: etrapolare il nome dello smell, il metodo dello smell ed inserirlo nel csv
-
                 if(smell.hasSmell()){
-                    System.out.println(smell.getSmellName());
                     Map<String, Set<String>> result = smell.getResult();
-                    Map<String, Integer> score = smell.getScore();
-                    System.out.print(" \t " + result.values());
-                    System.out.print(" \t " + score.values());
-                    System.out.print("\n");
-                    resultsWriter.writeResultOutput(smell.getResult());
+                    JSONObject smellEntry = new JSONObject();
+                    JSONArray array = new JSONArray();
+                    Set<String> strings = smell.getResult().get(smell.getSmellName());
+                    for (String smelll: strings) {
+                        array.add(smelll);
+                    }
+                    smellEntry.put("methods",array);
+                    smellEntry.put("score",smell.getScore().get(smell.getSmellName()));
+                    jsonResult.put(smell.getSmellName(),smellEntry);
                 }
             }
+            System.out.println(jsonResult);
         }
 
     }
